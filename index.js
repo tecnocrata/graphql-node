@@ -1,4 +1,9 @@
 const { graphql, buildSchema } = require("graphql");
+const express = require("express");
+const { graphqlHTTP } = require("express-graphql");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Definiendo schema
 const schema = buildSchema(`
@@ -20,7 +25,20 @@ const resolvers = {
   },
 };
 
-// // Ejecutar el primer Hello
-graphql(schema, "{ greetings }", resolvers).then((data) => {
-  console.log(data);
+app.use(
+  "/api",
+  graphqlHTTP({
+    schema: schema,
+    rootValue: resolvers,
+    graphiql: true, // This is the ide for testing
+  })
+);
+
+app.listen(PORT, () => {
+  console.log(`Server listen on port http://localhost:${process.env.PORT}/api`);
 });
+
+// // Ejecutar el primer Hello
+// graphql(schema, "{ greetings }", resolvers).then((data) => {
+//   console.log(data);
+// });
