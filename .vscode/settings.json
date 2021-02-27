@@ -1,0 +1,6 @@
+{
+  "javascript.validate.enable": false, //in your VSCode settings.json.
+  "[javascript]": {
+    "editor.defaultFormatter": "none"
+  }
+}
