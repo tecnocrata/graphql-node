@@ -1,6 +1,10 @@
+type Building {
+  _id: ID
+  name: String
+  code: String
+  localization: String
+}
+
 type Query {
-  "Retorna saludo al mundo"
-  hello: String
-  "Retorna un saludo a todos"
-  greetings: String
+  getBuildings: [Building]
 }
