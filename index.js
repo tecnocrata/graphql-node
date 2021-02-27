@@ -1,19 +1,16 @@
 const { buildSchema } = require('graphql')
 const express = require('express')
 const { graphqlHTTP } = require('express-graphql')
+const { readFileSync } = require('fs')
+const { join } = require('path')
 
 const app = express()
 const PORT = process.env.PORT || 3000
 
 // Definiendo schema
-const schema = buildSchema(`
-type Query {
-  "Retorna saludo al mundo"
-  hello: String
-  "Retorna un saludo a todos"
-  greetings: String
-}
-`)
+const schema = buildSchema(
+  readFileSync(
+    join(__dirname, 'lib', 'schema.graphql'), 'utf-8'))
 
 // Configurar los resolvers
 const resolvers = {
@@ -35,7 +32,7 @@ app.use(
 )
 
 app.listen(PORT, () => {
-  console.log(`Server listen on port http://localhost:${process.env.PORT}/api`)
+  console.log(`Server listen on port http://localhost:${PORT}/api`)
 })
 
 // // Ejecutar el primer Hello
