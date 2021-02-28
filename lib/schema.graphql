@@ -1,10 +1,13 @@
 type Building {
-  _id: ID
-  name: String
+  _id: ID!
+  name: String!
   code: String
   localization: String
 }
 
 type Query {
+  "Devuelve todos los edificios"
   getBuildings: [Building]
+  "Devuelve un solo edificio"
+  getBuild(id: ID!): Building
 }
