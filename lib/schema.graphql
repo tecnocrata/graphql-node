@@ -3,6 +3,7 @@ type Building {
   name: String!
   code: String
   localization: String
+  city: String
 }
 
 type Query {
@@ -10,4 +11,16 @@ type Query {
   getBuildings: [Building]
   "Devuelve un solo edificio"
   getBuild(id: ID!): Building
+}
+
+input BuildingInput {
+  name: String!
+  code: String
+  localization: String
+  city: String
+}
+
+type Mutation {
+  "Crea un Edificio"
+  createBuild(input: BuildingInput!): Building
 }
