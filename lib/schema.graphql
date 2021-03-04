@@ -42,6 +42,10 @@ input BuildingInput {
  city: String
 }
 
+input BuildingEditInput {
+ code: String
+}
+
 input PropertyInput {
  code: String!
  type: PropertyType!
@@ -50,9 +54,22 @@ input PropertyInput {
  buildingId: Int!
 }
 
+# Solo se puede editar el area, ningun otro campo
+input PropertyEditInput {
+ #code: String!
+ #type: PropertyType!
+ #floor: Int!
+ area: String!
+ #buildingId: Int!
+}
+
 type Mutation {
  "Crea un Edificio"
  createBuild(input: BuildingInput!): Building
+ "Edita o Actualiza una propiedad"
+ updateBuilding(input: BuildingEditInput!): Building
  "Crea una Propiedad"
  createProperty(input: PropertyInput!): Property
+ "Edita o Actualiza una propiedad"
+ updateProperty(input: PropertyEditInput!): Property
 }
