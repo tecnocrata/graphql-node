@@ -1,26 +1,58 @@
 type Building {
-  _id: ID!
-  name: String!
-  code: String
-  localization: String
-  city: String
+ _id: ID!
+ name: String!
+ code: String
+ localization: String
+ city: String
+ properties: [Property]
+}
+
+enum PropertyType {
+ Departament
+ Parking
+ Store
+}
+
+type Property {
+ _id: ID!
+ code: String!
+ type: PropertyType!
+ floor: Int!
+ area: String!
+ building: Building!
 }
 
 type Query {
-  "Devuelve todos los edificios"
-  getBuildings: [Building]
-  "Devuelve un solo edificio"
-  getBuild(id: ID!): Building
+ "Devuelve todos los edificios"
+ getBuildings: [Building]
+ "Devuelve un solo edificio"
+ getBuild(id: ID!): Building
+ "Devuelve todas las propiedades"
+ getAllProperties: [Property]
+ "Devuelve las propiedades de un solo edificio"
+ getPropertiesBuilding(id: ID!): [Property]
+ "Devuelve una sola propiedad"
+ getProperty(id: ID!): Property
 }
 
 input BuildingInput {
-  name: String!
-  code: String
-  localization: String
-  city: String
+ name: String!
+ code: String
+ localization: String
+ city: String
+}
+
+input PropertyInput {
+ code: String!
+ type: PropertyType!
+ floor: Int!
+ area: String!
+ buildingId: Int!
 }
 
 type Mutation {
-  "Crea un Edificio"
-  createBuild(input: BuildingInput!): Building
+ "Crea un Edificio"
+ createBuild(input: BuildingInput!): Building
+ "Crea una Propiedad"
+ createProperty(input: PropertyInput!): Property
 }
