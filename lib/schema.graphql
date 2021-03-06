@@ -30,7 +30,7 @@ type Query {
  "Devuelve todas las propiedades"
  getAllProperties: [Property]
  "Devuelve las propiedades de un solo edificio"
- getPropertiesBuilding(id: ID!): [Property]
+ getPropertiesByBuilding(id: ID!): [Property]
  "Devuelve una sola propiedad"
  getProperty(id: ID!): Property
 }
@@ -51,7 +51,7 @@ input PropertyInput {
  type: PropertyType!
  floor: Int!
  area: String!
- buildingId: Int!
+ buildingId: ID #Int!
 }
 
 # Solo se puede editar el area, ningun otro campo
@@ -67,9 +67,9 @@ type Mutation {
  "Crea un Edificio"
  createBuild(input: BuildingInput!): Building
  "Edita o Actualiza una propiedad"
- updateBuilding(input: BuildingEditInput!): Building
+ updateBuilding(_id: ID!, input: BuildingEditInput!): Building
  "Crea una Propiedad"
  createProperty(input: PropertyInput!): Property
  "Edita o Actualiza una propiedad"
- updateProperty(input: PropertyEditInput!): Property
+ updateProperty(_id: ID, input: PropertyEditInput!): Property
 }
