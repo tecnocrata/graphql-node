@@ -66,10 +66,12 @@ input PropertyEditInput {
 type Mutation {
  "Crea un Edificio"
  createBuild(input: BuildingInput!): Building
- "Edita o Actualiza una propiedad"
+ "Edita o Actualiza un edificio"
  updateBuilding(_id: ID!, input: BuildingEditInput!): Building
  "Crea una Propiedad"
  createProperty(input: PropertyInput!): Property
  "Edita o Actualiza una propiedad"
  updateProperty(_id: ID, input: PropertyEditInput!): Property
+ "Agrega Propiedades a un Edificio"
+ addProperty(propertyId: ID!, buildingId: ID!): Building
 }
