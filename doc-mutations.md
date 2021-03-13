@@ -40,4 +40,16 @@ mutation {
     _id
   }
 }
+
+mutation {
+  createPerson (input: {
+    name:"Enrique"
+    lastName:"Ortuno"
+    since:"21/9/2011"
+    celPhone:"72085585"
+  }){
+    _id
+    name
+  }
+}
 ```

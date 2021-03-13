@@ -22,6 +22,35 @@ type Property {
  building: Building!
 }
 
+interface Person {
+ _id: ID!
+ name: String!
+ lastName: String!
+ email: String
+ celPhone: String!
+ phone: String
+}
+
+type Owner implements Person {
+ _id: ID!
+ name: String!
+ lastName: String!
+ email: String
+ celPhone: String!
+ phone: String
+ since: String
+}
+
+type Doorman implements Person {
+ _id: ID!
+ name: String!
+ lastName: String!
+ email: String
+ celPhone: String!
+ phone: String
+ contractSince: String
+}
+
 type Query {
  "Devuelve todos los edificios"
  getBuildings: [Building]
@@ -33,6 +62,10 @@ type Query {
  getPropertiesByBuilding(id: ID!): [Property]
  "Devuelve una sola propiedad"
  getProperty(id: ID!): Property
+ "Devuelve todas las personas"
+ getPeople: [Person]
+ "Devuelve una sola persona"
+ getPerson(id: ID!): Person
 }
 
 input BuildingInput {
@@ -63,6 +96,16 @@ input PropertyEditInput {
  buildingId: ID
 }
 
+input PersonInput {
+ name: String!
+ lastName: String!
+ email: String
+ celPhone: String!
+ phone: String
+ since: String # For Owners!
+ contractSince: String # For Doormen
+}
+
 type Mutation {
  "Crea un Edificio"
  createBuild(input: BuildingInput!): Building
@@ -74,4 +117,6 @@ type Mutation {
  updateProperty(_id: ID, input: PropertyEditInput!): Property
  "Agrega Propiedades a un Edificio"
  addProperty(propertyId: ID!, buildingId: ID!): Building
+ "Crea una Persona"
+ createPerson(input: PersonInput!): Person
 }

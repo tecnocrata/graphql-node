@@ -79,3 +79,22 @@ fragment propertyFields on Property {
 #  }
 # }
 ```
+
+## Interfaces and how to query them
+
+```graphql
+{
+ getPeople {
+  _id
+  name
+  # Cuando haya algun portero recuperar su fecha de contratacion
+  ... on Doorman {
+   contractSince
+  }
+  # Cuando haya algun propietario recuperar su fecha de ingreso
+  ... on Owner {
+   since
+  }
+ }
+}
+```
