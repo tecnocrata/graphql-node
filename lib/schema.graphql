@@ -59,8 +59,8 @@ input PropertyEditInput {
  #code: String!
  #type: PropertyType!
  #floor: Int!
- area: String!
- #buildingId: Int!
+ area: String
+ buildingId: ID
 }
 
 type Mutation {
