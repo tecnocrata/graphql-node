@@ -98,3 +98,22 @@ fragment propertyFields on Property {
  }
 }
 ```
+
+## Directives and how to query with them. They are conditions
+
+```graphql
+query getPeopleData($includeDoormen: Boolean!) {
+ getPeople {
+  _id
+  name
+  # Cuando haya algun portero recuperar su fecha de contratacion
+  ... on Doorman @include(if: $includeDoormen) {
+   contractSince
+  }
+  # Cuando haya algun propietario recuperar su fecha de ingreso
+  ... on Owner {
+   since
+  }
+ }
+}
+```
