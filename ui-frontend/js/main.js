@@ -11,47 +11,65 @@ const template = `
 {{#each items}}
 <div class="item">
   <h2>{{__typename}}</h2>
-  <h3>{{title}}{{name}}</h3>
-  {{#with description}}
-    <p>{{../description}}</p>
+  {{#with name}}
+    <p>{{../name}}</p>
   {{/with}}
-  {{#with email}}
-    <p><a href="mailto:{{../email}}">{{../email}}</a></p>
+  {{#with area}}
+  <p>{{../area}}</p>
   {{/with}}
-  {{#with phone}}
-    <p><a href="tel:{{../phone}}">{{../phone}}</a></p>
+  {{#with area}}
+    <p><a href="code:{{../code}}">{{../code}}</a></p>
   {{/with}}
 </div>
 {{/each}}
 `
 const templateData = Handlebars.compile(template)
-
+debugger;
 async function search () {
+  // const query = `
+  //   query generalSearch ($keyword: String!){
+  //     searchItems(keyword: $keyword) {
+  //       __typename
+  //         ...on Course {
+  //           title
+  //           description
+  //         }
+  //         ...on Monitor {
+  //           name
+  //           phone
+  //         }
+  //         ...on Student {
+  //           name
+  //           email
+  //         }
+  //     }
+  //   }
+  // `
   const query = `
     query generalSearch ($keyword: String!){
-      searchItems(keyword: $keyword) {
+      searchItems(keyword: $keyword){
         __typename
-          ...on Course {
-            title
-            description
-          }
-          ...on Monitor {
-            name
-            phone
-          }
-          ...on Student {
-            name
-            email
-          }
+        ... on Owner {
+          name
+          lastName
+          since
+      }
+        ... on Property{
+          code
+          area
+        }
+        ... on Building{
+          name
+        }
       }
     }
   `
 
-  const data = { keyword: document.getElementById('search').value }
+  const variables = { keyword: document.getElementById('search').value }
   let result, html
 
   try {
-    result = await request(endpoint, query, data)
+    result = await request(endpoint, query, variables)
     html = templateData({ items: result.searchItems })
   } catch (error) {
     html = templateData({ error: error })

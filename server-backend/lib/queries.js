@@ -76,12 +76,14 @@ module.exports = {
     let items
     let people
     let buildings
+    let properties
     try {
       const db = await connectDB()
       people = await db.collection('persons').find({ $text: { $search: keyword } }).toArray()
       buildings = await db.collection('buildings').find({ $text: { $search: keyword } }).toArray()
-      items = [...people, ...buildings]
-      console.log(' getPerson RESULT ', items)
+      properties = await db.collection('properties').find({ $text: { $search: keyword } }).toArray()
+      items = [...people, ...buildings, ...properties]
+      console.log('searchItems RESULT ', items)
     } catch (error) {
       errorHandler(error)
     }

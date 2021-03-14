@@ -44,7 +44,7 @@ module.exports = {
   },
   GlobalSearch: {
     __resolveType: (item, context, info) => {
-      if (item.code) return 'Building'
+      if (item.properties) return 'Building'
       if (item.floor) return 'Property'
       return 'Owner'
     }

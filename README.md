@@ -1,6 +1,6 @@
 # Readme
 
-## Start up instructions
+## Backend - Start up instructions
 1. Run
 
 ```
@@ -11,6 +11,16 @@ docker-compose -f docker-compose.stack.yml up
 
 `yarn dev`
 
+## Frontend - Start up instructions
+1. Run for bundling UI
+
+```
+npm run bundle
+```
+
+2. Run open live server, because it is a static page
+
+3. Press "Buscar" button! after enter a keyword for searching
 ## Client libraries de menor a mayor complejidad y funcionalidad
 
 - FetchQl: https://www.npmjs.com/package/fetchql
