@@ -117,3 +117,17 @@ query getPeopleData($includeDoormen: Boolean!) {
  }
 }
 ```
+
+## Cuando este en produccion, se puede consultar por medio de POSTMAN (u otro similar) y mandar el query mediante un GET desde la URL, asi (debe hacer un rl enconde antes de enviar el GET)
+
+```
+http://localhost:3000/api?query= { getBuildings{
+    _id
+    name
+    properties {
+      _id
+      code
+    }
+  }
+}
+```
