@@ -3,7 +3,8 @@ const { ObjectID } = require('mongodb')
 const connectDB = require('./db')
 
 module.exports = {
-  Building: {
+  // Resolviendo tipos nested, crear una propiedad por el tipo padre y una funcion  por el tipo hijo
+  Building: { // Tipo Padre
     properties: async ({ _id, properties }) => { // this parameter deconstruted is the field in the DB
       let propertiesData = []
       console.log('Expanding Building with properties info')
